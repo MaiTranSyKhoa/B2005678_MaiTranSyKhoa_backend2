@@ -23,10 +23,10 @@ class ContactService {
         const contact = this.extractConactData(payload);
         const result = await this.Contact.findOneAndUpdate(
             contact,
-            { $set: { favorite: true } },
+            { $set: { favorite: contact.favorite === true } },
             { returnDocument: "after", upsert: true}
         );
-        return result;
+        return result.value;
     }
 
     async find(filter) {
